@@ -1,36 +1,39 @@
 package com.eduardojr.conectaris.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Contato implements Serializable {
+public class Provedor implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String observacao;
+	private Integer cnpj;
+	private String observacoes;
 	
-	@ManyToOne
-	@JoinColumn(name="provedor_id")
-	private Provedor provedor;
+	@OneToMany(mappedBy="provedor")
+	private List<Contato> contatos = new ArrayList<>();
 	
-	public Contato() {
+	public Provedor() {
 		
 	}
 
-	public Contato(Integer id, String nome, String observacao) {
+	public Provedor(Integer id, String nome, Integer cnpj, String observacoes) {
+		super();
 		this.id = id;
 		this.nome = nome;
-		this.observacao = observacao;
+		this.cnpj = cnpj;
+		this.observacoes = observacoes;
 	}
 
 	public Integer getId() {
@@ -49,20 +52,28 @@ public class Contato implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getObservacao() {
-		return observacao;
+	public Integer getCnpj() {
+		return cnpj;
 	}
 
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-	
-	public Provedor getProvedor() {
-		return provedor;
+	public void setCnpj(Integer cnpj) {
+		this.cnpj = cnpj;
 	}
 
-	public void setProvedor(Provedor provedor) {
-		this.provedor = provedor;
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+
+	public List<Contato> getContatos() {
+		return contatos;
+	}
+
+	public void setContatos(List<Contato> contatos) {
+		this.contatos = contatos;
 	}
 
 	@Override
@@ -81,13 +92,14 @@ public class Contato implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Contato other = (Contato) obj;
+		Provedor other = (Provedor) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
+	
 	
 }
