@@ -1,37 +1,37 @@
 package com.eduardojr.conectaris.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Contato implements Serializable {
+public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String observacao;
+	private String descricao;
+
+	@OneToMany(mappedBy="estado")
+	private List<Municipio> municipios = new ArrayList<>();
 	
-	@ManyToOne
-	@JoinColumn(name="provedor_id")
-	private Provedor provedor;
-	
-	public Contato() {
+	public Estado() {
 		
 	}
 
-	public Contato(Integer id, String nome, String observacao, Provedor provedor) {
+	public Estado(Integer id, String nome, String descricao) {
+		super();
 		this.id = id;
 		this.nome = nome;
-		this.observacao = observacao;
-		this.provedor = provedor;
+		this.descricao = descricao;
 	}
 
 	public Integer getId() {
@@ -50,20 +50,20 @@ public class Contato implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getObservacao() {
-		return observacao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-	
-	public Provedor getProvedor() {
-		return provedor;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public void setProvedor(Provedor provedor) {
-		this.provedor = provedor;
+	public List<Municipio> getMunicipios() {
+		return municipios;
+	}
+
+	public void setMunicipios(List<Municipio> municipios) {
+		this.municipios = municipios;
 	}
 
 	@Override
@@ -82,13 +82,14 @@ public class Contato implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Contato other = (Contato) obj;
+		Estado other = (Estado) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
+	
 	
 }

@@ -10,28 +10,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Contato implements Serializable {
+public class Municipio implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String observacao;
+	private String descricao;
 	
 	@ManyToOne
-	@JoinColumn(name="provedor_id")
-	private Provedor provedor;
+	@JoinColumn(name="estado_id")
+	private Estado estado;
 	
-	public Contato() {
+	public Municipio() {
 		
 	}
 
-	public Contato(Integer id, String nome, String observacao, Provedor provedor) {
+	public Municipio(Integer id, String nome, String descricao, Estado estado) {
+		super();
 		this.id = id;
 		this.nome = nome;
-		this.observacao = observacao;
-		this.provedor = provedor;
+		this.descricao = descricao;
+		this.estado = estado;
 	}
 
 	public Integer getId() {
@@ -50,20 +51,20 @@ public class Contato implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getObservacao() {
-		return observacao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-	
-	public Provedor getProvedor() {
-		return provedor;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public void setProvedor(Provedor provedor) {
-		this.provedor = provedor;
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -82,13 +83,14 @@ public class Contato implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Contato other = (Contato) obj;
+		Municipio other = (Municipio) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
+	
 	
 }
