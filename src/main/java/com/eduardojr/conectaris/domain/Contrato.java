@@ -1,12 +1,17 @@
 package com.eduardojr.conectaris.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Contrato implements Serializable {
@@ -20,17 +25,25 @@ public class Contrato implements Serializable {
 	private String descricao;
 	private Date data_inicio;
 	
+	@ManyToOne
+	@JoinColumn(name="provedor_id")
+	private Provedor provedor;
+	
+	@OneToMany(mappedBy="contrato")
+	private List<Link> links = new ArrayList<>();
+	
 	public Contrato() {
 		
 	}
 
-	public Contrato(Integer id, String contrato, String sla, String descricao, Date data_inicio) {
+	public Contrato(Integer id, String contrato, String sla, String descricao, Date data_inicio, Provedor provedor) {
 		super();
 		this.id = id;
 		this.contrato = contrato;
 		this.sla = sla;
 		this.descricao = descricao;
 		this.data_inicio = data_inicio;
+		this.provedor = provedor;
 	}
 
 	public Integer getId() {
@@ -72,7 +85,23 @@ public class Contrato implements Serializable {
 	public void setData_inicio(Date data_inicio) {
 		this.data_inicio = data_inicio;
 	}
+	
+	public Provedor getProvedor() {
+		return provedor;
+	}
+	
+	public void setProvedor(Provedor provedor) {
+		this.provedor = provedor;
+	}
 
+	public List<Link> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<Link> links) {
+		this.links = links;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

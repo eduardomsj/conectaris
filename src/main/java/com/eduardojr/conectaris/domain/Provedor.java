@@ -21,8 +21,14 @@ public class Provedor implements Serializable {
 	private Integer cnpj;
 	private String observacoes;
 	
+	//@OneToMany(mappedBy="provedor")
+	//private List<Contato> contatos = new ArrayList<>();
+	
+	@OneToMany(mappedBy="contrato")
+	private List<Contrato> contratos = new ArrayList<>();
+		
 	@OneToMany(mappedBy="provedor")
-	private List<Contato> contatos = new ArrayList<>();
+	private List<Link> links = new ArrayList<>();
 	
 	public Provedor() {
 		
@@ -68,14 +74,30 @@ public class Provedor implements Serializable {
 		this.observacoes = observacoes;
 	}
 
-	public List<Contato> getContatos() {
-		return contatos;
+	//public List<Contato> getContatos() {
+	//	return contatos;
+	//}
+
+	//public void setContatos(List<Contato> contatos) {
+	//	this.contatos = contatos;
+	//}
+
+	public List<Contrato> getContratos() {
+		return contratos;
 	}
 
-	public void setContatos(List<Contato> contatos) {
-		this.contatos = contatos;
+	public void setContratos(List<Contrato> contratos) {
+		this.contratos = contratos;
+	}
+	
+	public List<Link> getLinks() {
+		return links;
 	}
 
+	public void setLinks(List<Link> links) {
+		this.links = links;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
