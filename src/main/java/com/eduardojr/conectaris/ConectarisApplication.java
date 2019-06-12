@@ -46,8 +46,8 @@ public class ConectarisApplication implements CommandLineRunner {
 
 		Provedor p1 = new Provedor(null, "Brisanet", 123456, null);
 		
-		Contrato cont1 = new Contrato(null, null, "2 HORAS", "Contrato entre Brisanet e EJR", null, p1);
-		Contrato cont2 = new Contrato(null, null, "3 HORAS", "Contrato2 entre Brisanet e EJR", null, p1);
+		Contrato cont1 = new Contrato(null, "16/2019/EJR", "2 HORAS", "Contrato entre Brisanet e EJR", null, p1);
+		Contrato cont2 = new Contrato(null, "035/2019/EJR", "3 HORAS", "Contrato2 entre Brisanet e EJR", null, p1);
 		
 		Link link1 = new Link(null, 1500, "10 Mbps", "10.200.200.1", TipoLink.INTERNET, "10.200.200.0/24", "10.1.1.1", "10.1.1.2", cont1, p1);
 		Link link2 = new Link(null, 300, "2 Mbps", "10.2.2.1", TipoLink.DADOS, "10.2.2.0/24", "10.1.1.2", "10.1.1.3", cont2, p1);

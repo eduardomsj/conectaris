@@ -21,10 +21,7 @@ public class Provedor implements Serializable {
 	private Integer cnpj;
 	private String observacoes;
 	
-	//@OneToMany(mappedBy="provedor")
-	//private List<Contato> contatos = new ArrayList<>();
-	
-	@OneToMany(mappedBy="contrato")
+	@OneToMany(mappedBy="provedor")
 	private List<Contrato> contratos = new ArrayList<>();
 		
 	@OneToMany(mappedBy="provedor")
