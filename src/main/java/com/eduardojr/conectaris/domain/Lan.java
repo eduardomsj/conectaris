@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Lan implements Serializable {
@@ -22,11 +24,19 @@ public class Lan implements Serializable {
 	private String dns3;
 	private String descricao;
 	
+	@ManyToOne
+	@JoinColumn(name="localidade_id")
+	private Localidade localidade;
+	
+	@ManyToOne
+	@JoinColumn(name="chamado_id")
+	private Chamado chamado;
+	
 	public Lan() {
 	}
 
 	public Lan(Integer id, String faixa_ips, String mask, String gateway, String dns1, String dns2, String dns3,
-			String descricao) {
+			String descricao, Localidade localidade, Chamado chamado) {
 		super();
 		this.id = id;
 		this.faixa_ips = faixa_ips;
@@ -36,6 +46,8 @@ public class Lan implements Serializable {
 		this.dns2 = dns2;
 		this.dns3 = dns3;
 		this.descricao = descricao;
+		this.localidade = localidade;
+		this.chamado = chamado;
 	}
 
 	public Integer getId() {
@@ -100,6 +112,22 @@ public class Lan implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public Localidade getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(Localidade localidade) {
+		this.localidade = localidade;
+	}
+
+	public Chamado getChamado() {
+		return chamado;
+	}
+
+	public void setChamado(Chamado chamado) {
+		this.chamado = chamado;
 	}
 
 	@Override

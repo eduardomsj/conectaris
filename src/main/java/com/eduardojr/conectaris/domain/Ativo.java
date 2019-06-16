@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.eduardojr.conectaris.domain.enums.TipoAtivo;
 
@@ -21,16 +23,26 @@ public class Ativo implements Serializable {
 	private String patrimonio;
 	private Integer tipo;
 	
+	@ManyToOne
+	@JoinColumn(name="localidade_id")
+	private Localidade localidade;
+	
+	@ManyToOne
+	@JoinColumn(name="chamado_id")
+	private Chamado chamado;
+	
 	public Ativo() {
 	}
 
-	public Ativo(Integer id, String descricao, String serial, String patrimonio, TipoAtivo tipo) {
+	public Ativo(Integer id, String descricao, String serial, String patrimonio, TipoAtivo tipo, Localidade localidade, Chamado chamado) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.serial = serial;
 		this.patrimonio = patrimonio;
 		this.tipo = tipo.getCod();
+		this.localidade = localidade;
+		this.chamado = chamado;
 	}
 
 	public Integer getId() {
@@ -71,6 +83,22 @@ public class Ativo implements Serializable {
 
 	public void setTipo(TipoAtivo tipo) {
 		this.tipo = tipo.getCod();
+	}
+	
+	public Localidade getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(Localidade localidade) {
+		this.localidade = localidade;
+	}
+
+	public Chamado getChamado() {
+		return chamado;
+	}
+
+	public void setChamado(Chamado chamado) {
+		this.chamado = chamado;
 	}
 
 	@Override

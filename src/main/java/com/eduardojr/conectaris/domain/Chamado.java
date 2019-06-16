@@ -1,11 +1,16 @@
 package com.eduardojr.conectaris.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.eduardojr.conectaris.domain.enums.TipoChamado;
 
@@ -20,15 +25,29 @@ public class Chamado implements Serializable {
 	private String descricao;
 	private Integer tipo;
 	
+	@ManyToOne
+	@JoinColumn(name="localidade_id")
+	private Localidade localidade;
+	
+	@OneToMany(mappedBy="chamado")
+	private List<Ativo> ativos = new ArrayList<>();
+	
+	@OneToMany(mappedBy="chamado")
+	private List<Link> links = new ArrayList<>();
+	
+	@OneToMany(mappedBy="chamado")
+	private List<Lan> lans = new ArrayList<>();
+		
 	public Chamado() {
 	}
 
-	public Chamado(Integer id, String titulo, String descricao, TipoChamado tipo) {
+	public Chamado(Integer id, String titulo, String descricao, TipoChamado tipo, Localidade localidade) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.tipo = tipo.getCod();
+		this.localidade = localidade;
 	}
 
 	public Integer getId() {
@@ -61,6 +80,38 @@ public class Chamado implements Serializable {
 
 	public void setTipo(TipoChamado tipo) {
 		this.tipo = tipo.getCod();
+	}
+	
+	public Localidade getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(Localidade localidade) {
+		this.localidade = localidade;
+	}
+
+	public List<Ativo> getAtivos() {
+		return ativos;
+	}
+
+	public void setAtivos(List<Ativo> ativos) {
+		this.ativos = ativos;
+	}
+
+	public List<Link> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<Link> links) {
+		this.links = links;
+	}
+
+	public List<Lan> getLans() {
+		return lans;
+	}
+
+	public void setLans(List<Lan> lans) {
+		this.lans = lans;
 	}
 
 	@Override

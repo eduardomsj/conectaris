@@ -71,14 +71,6 @@ public class Provedor implements Serializable {
 		this.observacoes = observacoes;
 	}
 
-	//public List<Contato> getContatos() {
-	//	return contatos;
-	//}
-
-	//public void setContatos(List<Contato> contatos) {
-	//	this.contatos = contatos;
-	//}
-
 	public List<Contrato> getContratos() {
 		return contratos;
 	}

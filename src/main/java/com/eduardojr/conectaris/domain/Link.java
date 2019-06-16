@@ -34,12 +34,20 @@ public class Link implements Serializable {
 	@JoinColumn(name="provedor_id")
 	private Provedor provedor;
 	
+	@ManyToOne
+	@JoinColumn(name="localidade_id")
+	private Localidade localidade;
+	
+	@ManyToOne
+	@JoinColumn(name="chamado_id")
+	private Chamado chamado;
+	
 	public Link() {
 		
 	}
 
 	public Link(Integer id, Integer custo, String velocidade, String gateway, TipoLink tipo, String faixa_ips, String dns1, String dns2, Contrato contrato,
-			Provedor provedor) {
+			Provedor provedor, Localidade localidade, Chamado chamado) {
 		super();
 		this.id = id;
 		this.custo = custo;
@@ -51,6 +59,8 @@ public class Link implements Serializable {
 		this.setDns2(dns2);
 		this.contrato = contrato;
 		this.provedor = provedor;
+		this.localidade = localidade;
+		this.chamado = chamado;
 	}
 
 	public Integer getId() {
@@ -131,6 +141,22 @@ public class Link implements Serializable {
 
 	public void setProvedor(Provedor provedor) {
 		this.provedor = provedor;
+	}
+	
+	public Localidade getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(Localidade localidade) {
+		this.localidade = localidade;
+	}
+
+	public Chamado getChamado() {
+		return chamado;
+	}
+
+	public void setChamado(Chamado chamado) {
+		this.chamado = chamado;
 	}
 
 	@Override

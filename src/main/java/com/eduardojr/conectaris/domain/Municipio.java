@@ -1,6 +1,8 @@
 package com.eduardojr.conectaris.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Municipio implements Serializable {
@@ -23,6 +26,9 @@ public class Municipio implements Serializable {
 	@JoinColumn(name="estado_id")
 	private Estado estado;
 	
+	@OneToMany(mappedBy="municipio")
+	private List<Localidade> localidades = new ArrayList<>();
+		
 	public Municipio() {
 		
 	}
@@ -67,6 +73,14 @@ public class Municipio implements Serializable {
 		this.estado = estado;
 	}
 
+	public List<Localidade> getLocalidades() {
+		return localidades;
+	}
+
+	public void setLocalidades(List<Localidade> localidades) {
+		this.localidades = localidades;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,6 +105,5 @@ public class Municipio implements Serializable {
 			return false;
 		return true;
 	}
-	
 	
 }
