@@ -3,16 +3,16 @@ package com.eduardojr.conectaris.domain;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String endereco;
 	private String numero;
@@ -20,11 +20,16 @@ public class Endereco implements Serializable {
 	private String bairro;
 	private String cep;
 	
+	@OneToOne
+	@JoinColumn(name="localidade_id")
+	@MapsId
+	private Localidade localidade;
+	
 	public Endereco() {
 		
 	}
 
-	public Endereco(Integer id, String endereco, String numero, String complemento, String bairro, String cep) {
+	public Endereco(Integer id, String endereco, String numero, String complemento, String bairro, String cep, Localidade localidade) {
 		super();
 		this.id = id;
 		this.endereco = endereco;
@@ -32,6 +37,7 @@ public class Endereco implements Serializable {
 		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cep = cep;
+		this.localidade = localidade;
 	}
 
 	public Integer getId() {
@@ -81,6 +87,14 @@ public class Endereco implements Serializable {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+	
+	public Localidade getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(Localidade localidade) {
+		this.localidade = localidade;
+	}
 
 	@Override
 	public int hashCode() {
@@ -105,6 +119,6 @@ public class Endereco implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
+	}	
 			
 }

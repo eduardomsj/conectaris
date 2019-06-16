@@ -10,7 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.eduardojr.conectaris.domain.Ativo;
 import com.eduardojr.conectaris.domain.Chamado;
 import com.eduardojr.conectaris.domain.Contato;
+import com.eduardojr.conectaris.domain.ContatoLocalidade;
+import com.eduardojr.conectaris.domain.ContatoProvedor;
 import com.eduardojr.conectaris.domain.Contrato;
+import com.eduardojr.conectaris.domain.Endereco;
 import com.eduardojr.conectaris.domain.Estado;
 import com.eduardojr.conectaris.domain.Lan;
 import com.eduardojr.conectaris.domain.Link;
@@ -78,6 +81,18 @@ public class ConectarisApplication implements CommandLineRunner {
 		Localidade l1 = new Localidade(null, "Promotoria de Jaguaribe", TipoLocalidade.PROMOTORIA_INICIAL, null, mun2);
 		Localidade l2 = new Localidade(null, "Promotoria de Fortaleza", TipoLocalidade.PROMOTORIA_FINAL, null, mun1);
 		
+		Endereco end1 = new Endereco(null, "Av. 8 de Novembro", "S/N", null, "Aldeota", "60475-000", l1);
+		Endereco end2 = new Endereco(null, "Rua Barão do Rio Branco", "1100", null, "José Bonifácio", "60000-000", l2);
+		
+		l1.setEndereco(end1);
+		l2.setEndereco(end2);
+		
+		Contato con1 = new ContatoLocalidade(null, "Eduardo", null, l1);
+		Contato con2 = new ContatoProvedor(null, "Vinicus", "Ligar sempre à tarde", p1);
+		
+		con1.getTelefones().addAll(Arrays.asList("2345678","99995566"));
+		con2.getTelefones().addAll(Arrays.asList("9876543"));
+				
 		mun1.getLocalidades().addAll(Arrays.asList(l2));
 		mun2.getLocalidades().addAll(Arrays.asList(l1));
 		
@@ -93,10 +108,6 @@ public class ConectarisApplication implements CommandLineRunner {
 
 		Chamado ch1 = new Chamado(null, "Computador reiniciando", "Computador reinicia a cada 10 minutos", TipoChamado.INCIDENTE, l1);
 		l1.getChamados().addAll(Arrays.asList(ch1));
-		
-		Contato c1 = new Contato(null, "Vinicius", null, p1);
-		Contato c2 = new Contato(null, "Marcia", null, null);		
-		c1.getTelefones().addAll(Arrays.asList("2345678", "96699669"));
 			
 		p1.getLinks().addAll(Arrays.asList(link1, link2));
 		p1.getContratos().addAll(Arrays.asList(cont1, cont2));
@@ -111,7 +122,7 @@ public class ConectarisApplication implements CommandLineRunner {
 		provedorRepository.saveAll(Arrays.asList(p1));
 		contratoRepository.saveAll(Arrays.asList(cont1, cont2));
 		linkRepository.saveAll(Arrays.asList(link1, link2));
-		contatoRepository.saveAll(Arrays.asList(c1, c2));
+		contatoRepository.saveAll(Arrays.asList(con1, con2));
 				
 	}
 

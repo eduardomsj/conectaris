@@ -10,11 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
-public class Contato implements Serializable {
+@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class Contato implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -27,19 +28,14 @@ public class Contato implements Serializable {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
-	@ManyToOne
-	@JoinColumn(name="provedor_id")
-	private Provedor provedor;
-	
 	public Contato() {
 		
 	}
 
-	public Contato(Integer id, String nome, String observacao, Provedor provedor) {
+	public Contato(Integer id, String nome, String observacao) {
 		this.id = id;
 		this.nome = nome;
-		this.observacao = observacao;
-		this.provedor = provedor;
+		this.observacao = observacao;		
 	}
 
 	public Integer getId() {
@@ -66,14 +62,6 @@ public class Contato implements Serializable {
 		this.observacao = observacao;
 	}
 	
-	public Provedor getProvedor() {
-		return provedor;
-	}
-
-	public void setProvedor(Provedor provedor) {
-		this.provedor = provedor;
-	}
-
 	public Set<String> getTelefones() {
 		return telefones;
 	}

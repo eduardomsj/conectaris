@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.eduardojr.conectaris.domain.enums.TipoLocalidade;
 
@@ -25,9 +27,15 @@ public class Localidade implements Serializable {
 	private Integer tipo;
 	private String descricao;
 	
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="localidade")
+	private Endereco endereco;
+	
 	@ManyToOne
 	@JoinColumn(name="municipio_id")
 	private Municipio municipio;
+	
+	@OneToMany(mappedBy="localidade")
+	private List<ContatoLocalidade> contatos = new ArrayList<>();
 	
 	@OneToMany(mappedBy="localidade")	
 	private List<Link> links = new ArrayList<>();
@@ -85,6 +93,14 @@ public class Localidade implements Serializable {
 		this.descricao = descricao;
 	}
 	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 	public Municipio getMunicipio() {
 		return municipio;
 	}
@@ -125,6 +141,14 @@ public class Localidade implements Serializable {
 		this.chamados = chamados;
 	}
 
+	public List<ContatoLocalidade> getContatos() {
+		return contatos;
+	}
+
+	public void setContatos(List<ContatoLocalidade> contatos) {
+		this.contatos = contatos;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -148,6 +172,6 @@ public class Localidade implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
+	}	
 		
 }

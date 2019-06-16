@@ -27,6 +27,9 @@ public class Provedor implements Serializable {
 	@OneToMany(mappedBy="provedor")
 	private List<Link> links = new ArrayList<>();
 	
+	@OneToMany(mappedBy="provedor")
+	private List<ContatoProvedor> contatos = new ArrayList<>();
+	
 	public Provedor() {
 		
 	}
@@ -85,6 +88,14 @@ public class Provedor implements Serializable {
 
 	public void setLinks(List<Link> links) {
 		this.links = links;
+	}
+	
+	public List<ContatoProvedor> getContatos() {
+		return contatos;
+	}
+
+	public void setContatos(List<ContatoProvedor> contatos) {
+		this.contatos = contatos;
 	}
 	
 	@Override
