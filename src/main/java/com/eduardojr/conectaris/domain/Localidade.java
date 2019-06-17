@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.eduardojr.conectaris.domain.enums.TipoLocalidade;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Localidade implements Serializable {
@@ -30,6 +31,7 @@ public class Localidade implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="localidade")
 	private Endereco endereco;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="municipio_id")
 	private Municipio municipio;
@@ -37,15 +39,19 @@ public class Localidade implements Serializable {
 	@OneToMany(mappedBy="localidade")
 	private List<ContatoLocalidade> contatos = new ArrayList<>();
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy="localidade")	
 	private List<Link> links = new ArrayList<>();
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy="localidade")
 	private List<Ativo> ativos = new ArrayList<>();
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy="localidade")
 	private List<Lan> lans = new ArrayList<>();
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy="localidade")
 	private List<Chamado> chamados = new ArrayList<>();
 	

@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.eduardojr.conectaris.domain.enums.TipoChamado;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Chamado implements Serializable {
@@ -25,6 +26,7 @@ public class Chamado implements Serializable {
 	private String descricao;
 	private Integer tipo;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="localidade_id")
 	private Localidade localidade;

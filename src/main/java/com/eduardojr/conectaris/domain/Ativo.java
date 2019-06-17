@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.eduardojr.conectaris.domain.enums.TipoAtivo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Ativo implements Serializable {
@@ -23,6 +24,7 @@ public class Ativo implements Serializable {
 	private String patrimonio;
 	private Integer tipo;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="localidade_id")
 	private Localidade localidade;

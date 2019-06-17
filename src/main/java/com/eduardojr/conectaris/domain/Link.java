@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.eduardojr.conectaris.domain.enums.TipoLink;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Link implements Serializable {
@@ -34,6 +35,7 @@ public class Link implements Serializable {
 	@JoinColumn(name="provedor_id")
 	private Provedor provedor;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="localidade_id")
 	private Localidade localidade;
