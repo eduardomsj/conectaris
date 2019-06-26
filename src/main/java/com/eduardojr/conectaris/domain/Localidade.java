@@ -28,6 +28,7 @@ public class Localidade implements Serializable {
 	private Integer tipo;
 	private String descricao;
 	
+	@JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="localidade")
 	private Endereco endereco;
 	

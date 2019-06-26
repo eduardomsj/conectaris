@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Provedor implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,9 +24,11 @@ public class Provedor implements Serializable {
 	private Integer cnpj;
 	private String observacoes;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="provedor")
 	private List<Contrato> contratos = new ArrayList<>();
-		
+	
+	@JsonManagedReference
 	@OneToMany(mappedBy="provedor")
 	private List<Link> links = new ArrayList<>();
 	

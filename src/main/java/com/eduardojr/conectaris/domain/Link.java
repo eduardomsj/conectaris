@@ -27,10 +27,12 @@ public class Link implements Serializable {
 	private String dns1;
 	private String dns2;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="contrato_id")
 	private Contrato contrato;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="provedor_id")
 	private Provedor provedor;

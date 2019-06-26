@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Contrato implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,10 +27,12 @@ public class Contrato implements Serializable {
 	private String descricao;
 	private Date data_inicio;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="provedor_id")
 	private Provedor provedor;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy="contrato")
 	private List<Link> links = new ArrayList<>();
 	
